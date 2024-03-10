@@ -1,2 +1,1 @@
-#pip install -r r.txt
-#need Python
+# pip install -r r.txt
