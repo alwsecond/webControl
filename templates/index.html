@@ -61,7 +61,6 @@
                 url: "{{ url_for('screen_func') }}",
                 data: {"status": "200"},
                 success: function(data) {
-                    // Создаем случайное число для обновления URL изображения и избегаем кеширования
                     document.getElementById("image").src = "static/img.png" + "?t=" + new Date().getTime();
                 }
             });
