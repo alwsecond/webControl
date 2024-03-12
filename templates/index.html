@@ -4,50 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body id="body">
+<body>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <style>
         :root {
             --color2: #000b1f;
+            --color3: #20b965;
         }
         button {
-            padding: 5px 10px;
+            margin-bottom: 3px;
+            padding: 5px 15px;
             border-radius: 5px;
             color: white;
             background-color: var(--color2);
             transition: .2s;
             border: 1px solid white;
         }
-        button:active {
+        button:hover {
             background-color: white;
             color: var(--color2);
             border: 1px solid var(--color2);
+        }
+        button:active {
+            transform: scale(.95);
+            color: var(--color3);
+            border-color: var(--color3);
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         input {
+            outline: none;
             margin: 10px 0px;
             padding: 3px 5px;
             border: 1px solid var(--color2);
+        }
+        .main {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: column;
         }
     </style>
     <div class="main">
         <h2 id="h2hostname">{{ hostname }}</h2>
         <div class="input-div">
-            <input id="input">
+            <input id="input" placeholder="value">
         </div>
-        <div class="off-func">
-            <span>pc</span>
-            <button onclick="offPOST()">off</button>
-        </div>
-        <div class="screen-func">
-            <span>screen</span>
-            <button onclick="screenPOST()">take</button>
-        </div>
-        <div class="cmd-func">
-            <span>cmd</span>
-            <button onclick="cmdPOST()">run</button>
+        <div class="divall-func">
+            <div class="off-func">
+                <span>pc</span>
+                <button onclick="offPOST()">off</button>
+            </div>
+            <div class="screen-func">
+                <span>screen</span>
+                <button onclick="screenPOST()">take</button>
+            </div>
+            <div class="cmd-func">
+                <span>cmd</span>
+                <button onclick="cmdPOST()">run</button>
+            </div>
         </div>
         <div class="screen-div">
             <img id="image" src="{{ url_for('static', filename='img.png') }}" style="width: 100%; height: 100%;">
@@ -59,7 +75,6 @@
             $.ajax({
                 type: "POST",
                 url: "{{ url_for('screen_func') }}",
-                data: {"status": "200"},
                 success: function(data) {
                     document.getElementById("image").src = "static/img.png" + "?t=" + new Date().getTime();
                 }
